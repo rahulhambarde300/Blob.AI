@@ -47,17 +47,16 @@ public class BlobController : MonoBehaviour
         rb.velocity = moveVelocity;
     }
 
-    private void Goto(Vector3 position)
+    private void Goto(Vector3 mousePosition)
     {
         //Blob will go to the pointed place
         Vector2 mouse = Input.mousePosition;
         //rb.MovePosition(Input.mousePosition);
         //rb.velocity = (Input.mousePosition - transform.position)* new Vector2(0.5f,0.5f);
 
-        while(transform.position != position)
-        {
-            rb.MovePosition(position * Time.fixedDeltaTime);
-        }
+       
+            rb.position = mousePosition;
+
     }
 
     private void Wait()
