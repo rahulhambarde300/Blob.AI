@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //transform.Find("BloodSprayEffect").gameObject.SetActive(false);
         onGround = IsGrounded();
         if (Input.GetKey(KeyCode.D))
         {
@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(float dmg)
     {
         currentHealth -= dmg;
+        transform.Find("BloodSprayEffect").gameObject.SetActive(true);
     }
 
     private void Die()

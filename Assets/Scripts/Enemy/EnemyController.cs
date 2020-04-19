@@ -29,6 +29,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //transform.Find("BloodSprayEffect").gameObject.SetActive(false);
         onGround = IsGrounded();
         if (currentHealth <= 0)
         {
@@ -89,6 +90,7 @@ public class EnemyController : MonoBehaviour
     public void takeDamage(float dmg)
     {
         currentHealth -= dmg;
+        transform.Find("BloodSprayEffect").gameObject.SetActive(true);
     }
 
     private void Die()
