@@ -37,11 +37,11 @@ public class BulletMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "enemy")
+        if(collision.gameObject.tag == "Enemy")
         {
             //Enemy takes damage
-            //collision.transform.GetComponent<EnemyController>().takeDamage(damage);
-            Destroy(gameObject,0.2f);
+            collision.transform.GetComponent<EnemyController>().takeDamage(damage);
+            Destroy(gameObject,0f);
         }
     }
 }

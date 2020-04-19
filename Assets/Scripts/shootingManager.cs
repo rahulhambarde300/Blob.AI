@@ -13,6 +13,7 @@ public class shootingManager : MonoBehaviour
     public float bulletSpeed;
 
     public float accuracy;
+    public float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +50,7 @@ public class shootingManager : MonoBehaviour
                 Rigidbody2D bulletInstance = Instantiate(bullet, spawnPosition.position, spawnPosition.rotation * Quaternion.Euler(acc)) as Rigidbody2D;
                 //bulletInstance.velocity = (new Vector2(direction.x, direction.y).normalized) *  new Vector2(bulletSpeed,bulletSpeed);
                 shotTime = Time.time + timeBetweenShot;
+                bulletInstance.GetComponent<BulletMovement>().damage = damage;
                 //GetComponent<Animator>().enabled = true;
                 Destroy(bulletInstance.gameObject, 4f);
             }
