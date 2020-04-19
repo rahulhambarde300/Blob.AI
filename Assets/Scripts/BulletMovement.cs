@@ -6,26 +6,31 @@ public class BulletMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     Rigidbody2D rb;
-    public float speed = 10f;
+    public float speed = 60f;
     public float damage;
 
     Vector3 pos;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
         pos = Input.mousePosition;
         pos = Camera.main.ScreenToWorldPoint(pos);
+
+        //rb.velocity = new Vector2(transform.rotation.x*speed, transform.rotation.y*speed);
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        movement();
+
+        move();
     }
 
-    void movement()
+
+    // Update is called once per frame
+    void move()
     {
         transform.position += transform.right * speed * Time.deltaTime;
     }
