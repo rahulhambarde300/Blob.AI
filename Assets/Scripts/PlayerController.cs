@@ -9,20 +9,16 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     float distToGround;
     Vector2 force;
-    public bool onGround;
+    bool onGround;
     public LayerMask lm;
 
-    //public GameObject bullet;
-    public Transform spawnPosition;
+
     public float speed = 5f;
     bool coroutineUse = false;
-    public GameObject shot;
-    public float Damage = 10;
-    public float fireRate = 0;
-    float timeToFire = 0;
 
-    public GameObject blob;
-    public Sprite gunSprite;
+    public Animation running;
+    public Animation Idle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,10 +67,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         */
-        if (Input.GetButtonDown("Jump"))
-        {
-            blob.GetComponent<BlobController>().changeShape(gunSprite);
-        }
+        
 
 
     }
@@ -84,6 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         //rb.MovePosition(transform.position + transform.right * 5*facingDirection * Time.fixedDeltaTime);
         rb.AddForce(transform.right * facingDirection * speed);
+        
 
     }
 
@@ -91,17 +85,5 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distToGround + 0.1f,lm);
         return hit.collider != null;
-    }
-
-    void Idle()
-    {
-
-    }
-
-    void Shoot()
-    {
-        Instantiate(shot, spawnPosition.position,spawnPosition.rotation);
-        Vector2 firePointPosition = new Vector2(spawnPosition.position.x,spawnPosition.position.y);
-        
     }
 }

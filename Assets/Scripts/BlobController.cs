@@ -15,12 +15,15 @@ public class BlobController : MonoBehaviour
     float speed = 1.5f;
     Vector2 pos;
     bool goTo;
+    int index;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         follow = true;
+        index = 0;
+
     }
 
     // Update is called once per frame
@@ -50,10 +53,7 @@ public class BlobController : MonoBehaviour
             Wait();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            AutoAttack();
-        }
+
 
         if (goTo){       
             transform.position = Vector2.Lerp(transform.position, pos, speed * Time.deltaTime);
@@ -61,18 +61,21 @@ public class BlobController : MonoBehaviour
 
         }
 
-        
+        if (Input.GetButtonDown("Jump"))
+        {
+            changeShape();
+        }
+
 
     }
 
     private void FixedUpdate()
     {
-        Vector2 toTarget = (Vector2)player.position - (Vector2)transform.position - new Vector2(facingDirection,-1);
+        Vector2 toTarget = (Vector2)player.position - (Vector2)transform.position - new Vector2(facingDirection*2,-4);
         
         if (follow)
         {
             transform.Translate(toTarget * speed * Time.deltaTime);
-            transform.parent = player;
         }
     }
 
@@ -85,20 +88,19 @@ public class BlobController : MonoBehaviour
         follow = follow ? false : true;
     }
 
-    public void changeShape(Sprite weapon)
+    public void changeShape()
     {
-        //GetComponent<SpriteRenderer>().sprite = weapon;
-        //GetComponent<shootingManager>().enabled = true;
-        if(player.Find("pistol").gameObject != null){
-            player.Find("pistol").gameObject.SetActive(true);
-            gameObject.SetActive(false);
-        }
+        int childCount = transform.childCount;
+        transform.GetChild(index).gameObject.SetActive(false);
+        //Set current weapon as invisible
+        index += 1;
+        index %= childCount;
+        //Set next weapon as visible
+        transform.GetChild(index).gameObject.SetActive(true);
+
         
     }
 
-    private void AutoAttack()
-    {
-        //Blob will autoattack enemies
-    }
+
 
 }
