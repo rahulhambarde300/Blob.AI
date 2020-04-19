@@ -43,5 +43,15 @@ public class BulletMovement : MonoBehaviour
             collision.transform.GetComponent<EnemyController>().takeDamage(damage);
             Destroy(gameObject,0f);
         }
+        if(collision.gameObject.tag == "Ground")
+        {
+            //Activate the particles effect
+            Destroy(gameObject, 0f);
+        }
+        if(collision.gameObject.tag == "Player")
+        {
+            collision.transform.GetComponent<PlayerController>().takeDamage(damage);
+            Destroy(gameObject, 0f);
+        }
     }
 }

@@ -16,8 +16,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     bool coroutineUse = false;
 
-    public Animation running;
-    public Animation Idle;
+    public float MaxHealth = 100f;
+    public float currentHealth;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         distToGround = GetComponent<Collider2D>().bounds.extents.y;
         force = new Vector2(0, jumpForce);
+        currentHealth = MaxHealth;
     }
 
 
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         onGround = IsGrounded();
         if (Input.GetKey(KeyCode.D))
         {
@@ -64,25 +67,13 @@ public class PlayerController : MonoBehaviour
             rb.velocity = force;
 
         }
-        /*
-        if (fireRate == 0)
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                Shoot();
-            }
-        }
-        else
-        {
-            if (Input.GetButton("Fire1") && Time.time > timeToFire)
-            {
-                timeToFire = Time.time + 1 / fireRate;
-                Shoot();
-            }
-        }
-        */
         
 
+        onGround = IsGrounded();
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
 
     }
 
@@ -108,5 +99,16 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distToGround -3.3f,lm);
         return hit.collider != null;
+    }
+
+    public void takeDamage(float dmg)
+    {
+        currentHealth -= dmg;
+    }
+
+    private void Die()
+    {
+        //GetComponent<Animator>().SetBool("Dead", true);
+        Destroy(gameObject, 0.5f);
     }
 }
