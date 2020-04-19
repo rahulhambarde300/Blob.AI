@@ -7,9 +7,9 @@ public class PlayerController : MonoBehaviour
     public int facingDirection;
     Rigidbody2D rb;
     public float jumpForce;
-    float distToGround;
+    public float distToGround;
     Vector2 force;
-    bool onGround;
+    public bool onGround;
     public LayerMask lm;
 
 
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        facingDirection = 1;
+        facingDirection = -1;
         rb = GetComponent<Rigidbody2D>();
         distToGround = GetComponent<Collider2D>().bounds.extents.y;
         force = new Vector2(0, jumpForce);
@@ -36,15 +36,29 @@ public class PlayerController : MonoBehaviour
         onGround = IsGrounded();
         if (Input.GetKey(KeyCode.D))
         {
+            if (facingDirection != 1)
+            {
+                transform.localScale = transform.localScale * new Vector2(-1, 1);
+            }
             facingDirection = 1;
             Walk();
+            
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
+            if (facingDirection != -1)
+            {
+                transform.localScale = transform.localScale * new Vector2(-1, 1);
+            }
             facingDirection = -1;
             Walk();
+
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        else
+        {
+            transform.GetComponent<Animator>().SetBool("run", false);
+        }
+        if (Input.GetKeyDown(KeyCode.W) && onGround)
         {
             
             rb.velocity = force;
@@ -76,14 +90,23 @@ public class PlayerController : MonoBehaviour
     void Walk()
     {
         //rb.MovePosition(transform.position + transform.right * 5*facingDirection * Time.fixedDeltaTime);
-        rb.AddForce(transform.right * facingDirection * speed);
+        if(!onGround)
+        {
+            rb.velocity = new Vector2(3f * facingDirection, rb.velocity.y);
+            transform.GetComponent<Animator>().SetBool("run", true);
+        }
+        else
+        {
+            rb.velocity = new Vector2(5f * facingDirection, rb.velocity.y);
+            transform.GetComponent<Animator>().SetBool("run", true);
+        }
         
 
     }
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distToGround + 0.1f,lm);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distToGround -3.3f,lm);
         return hit.collider != null;
     }
 }

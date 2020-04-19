@@ -8,6 +8,8 @@ public class shootingManager : MonoBehaviour
     public Rigidbody2D bullet;
     bool revert = false;
     Transform spawnPosition;
+    public float timeBetweenShot;
+    public float shotTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +37,16 @@ public class shootingManager : MonoBehaviour
         transform.rotation = rotation;
         //...instantiating the rocket
        
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButton("Fire1"))
         {
-            Rigidbody2D bulletInstance = Instantiate(bullet, spawnPosition.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody2D;
-            bulletInstance.velocity = new Vector2(direction.x * 10f, direction.y * 10f);
+            if(Time.time >= shotTime)
+            {
+                Rigidbody2D bulletInstance = Instantiate(bullet, spawnPosition.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody2D;
+                bulletInstance.velocity = new Vector2(direction.x * 10f, direction.y * 10f);
+                shotTime = Time.time + timeBetweenShot;
+            }
+
+            
 
         }
         

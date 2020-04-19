@@ -248,6 +248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7708408527446530644, guid: 1e21d0316fa8e0c42ba142218132a6bd, type: 3}
+  timeBetweenShot: 0.75
+  shotTime: 0
 --- !u!212 &575263377
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -352,7 +354,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -559,6 +561,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingDirection: 0
   jumpForce: 10
+  distToGround: 0
+  onGround: 0
   lm:
     serializedVersion: 2
     m_Bits: 256
@@ -742,6 +746,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7708408527446530644, guid: 1e21d0316fa8e0c42ba142218132a6bd, type: 3}
+  timeBetweenShot: 0.25
+  shotTime: 0
 --- !u!212 &1485526557
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -895,7 +901,7 @@ GameObject:
   - component: {fileID: 1695136756}
   - component: {fileID: 1695136755}
   - component: {fileID: 1695136754}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -987,7 +993,7 @@ Transform:
   m_GameObject: {fileID: 1695136753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.344, y: 16.88, z: 0}
-  m_LocalScale: {x: 6.879491, y: 0.0672516, z: 1}
+  m_LocalScale: {x: 6.879491, y: 0.7792443, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
