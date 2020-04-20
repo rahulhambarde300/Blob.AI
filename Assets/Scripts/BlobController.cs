@@ -19,6 +19,8 @@ public class BlobController : MonoBehaviour
     public int maxCount;
     public float maxPower=100;
     public float currentPower;
+    public float shotTime;
+    public float loopTime;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +30,7 @@ public class BlobController : MonoBehaviour
         index = 0;
         maxCount = 3;
         currentPower = maxPower;
-        StartCoroutine(powerGain());
+        //StartCoroutine(powerGain());
     }
 
     // Update is called once per frame
@@ -70,6 +72,12 @@ public class BlobController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             changeShape();
+        }
+
+        if(Time.time > shotTime)
+        {
+            powerGain();
+            shotTime = Time.time + loopTime;
         }
 
         
@@ -116,17 +124,15 @@ public class BlobController : MonoBehaviour
         FindObjectOfType<GameController>().decreasePower(loss);
     }
 
-    IEnumerator powerGain()
+    void powerGain()
     {
-        while (true)
-        {
-            if(currentPower < maxPower)
+          if(currentPower < maxPower)
             {
-                currentPower += 2;
-                FindObjectOfType<GameController>().increasePower(2);
-                yield return new WaitForSeconds(0.2f);
+                currentPower += 1;
+                FindObjectOfType<GameController>().increasePower(1);
+                
             }
-        }
+        
     }
 
 

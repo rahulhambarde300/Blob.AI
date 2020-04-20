@@ -44,10 +44,10 @@ public class shootingManager : MonoBehaviour
         transform.rotation = rotation;
         //...instantiating the rocket
        
-        if (Input.GetButton("Fire1") && power >= powerConsumption)
+        if (Input.GetButton("Fire1") )
         {
 
-            if(Time.time >= shotTime)
+            if(Time.time >= shotTime && power >= powerConsumption)
             {
                 transform.Find("SpawnPosition/muzzle flash").gameObject.SetActive(true);
                 Vector3 acc = new Vector3(0, 0, Random.Range(-accuracy, accuracy));

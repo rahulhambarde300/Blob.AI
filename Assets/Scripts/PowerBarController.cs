@@ -14,13 +14,13 @@ public class PowerBarController : MonoBehaviour
         powerSlider.minValue = 0;
     }
 
-    public void setHealth(float health)
+    public void setPower(float health)
     {
         powerSlider = this.gameObject.GetComponent<Slider>();
         powerSlider.value = health;
     }
 
-    public void setMaxHealth(float maxHealth)
+    public void setMaxPower(float maxHealth)
     {
         powerSlider = this.gameObject.GetComponent<Slider>();
         powerSlider.maxValue = maxHealth;

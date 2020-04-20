@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
     private HealthBarController healthInstance;
     private PowerBarController powerInstance;
     public GameObject healthBarController;
+    public GameObject powerBarController;
 
     private float health;
     private float power;
@@ -24,13 +25,13 @@ public class GameController : MonoBehaviour
         {
             //gameOverScript = gameControlObject.GetComponent<GameOverScript>();
             healthInstance = healthBarController.GetComponent<HealthBarController>();
-            powerInstance = healthBarController.GetComponent<PowerBarController>();
+            powerInstance = powerBarController.GetComponent<PowerBarController>();
             
             healthInstance.setMaxHealth(100.0f);
             healthInstance.setHealth(100.0f);
 
-            powerInstance.setMaxHealth(100.0f);
-            powerInstance.setHealth(100.0f);
+            powerInstance.setMaxPower(100.0f);
+            powerInstance.setPower(100.0f);
         }
         if (gameControlObject == null)
             Debug.Log("Sorry ,Couldn't find object");
@@ -69,7 +70,7 @@ public class GameController : MonoBehaviour
 
     public void increasePower(float power2)
     {
-        if (power <= 100 - power2)
+        if (power <= 99)
             power += power2;
         else
             power = power2;
@@ -85,7 +86,7 @@ public class GameController : MonoBehaviour
 
     void updatePower(float power)
     {
-        healthInstance.setHealth(power);
+        powerInstance.setPower(power);
     }
 
 }
