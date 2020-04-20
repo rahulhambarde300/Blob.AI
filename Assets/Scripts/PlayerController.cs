@@ -132,7 +132,20 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= dmg;
         //transform.Find("BloodSprayEffect").gameObject.SetActive(true);
-        //FindObjectOfType<GameController>().decreaseHealth(dmg);
+        FindObjectOfType<GameController>().decreaseHealth(dmg);
+    }
+
+    public void healthUp()
+    {
+        if(currentHealth <= 70)
+        {
+            currentHealth += 30;
+        }
+        else
+        {
+            currentHealth = 100;
+        }
+        FindObjectOfType<GameController>().increaseHealth();
     }
 
     private void Die()

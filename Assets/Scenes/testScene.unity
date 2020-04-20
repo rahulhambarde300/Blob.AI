@@ -4883,6 +4883,7 @@ GameObject:
   - component: {fileID: 1026711715}
   - component: {fileID: 1026711714}
   - component: {fileID: 1026711713}
+  - component: {fileID: 1026711716}
   m_Layer: 5
   m_Name: BlobPowerBar
   m_TagString: Untagged
@@ -4997,6 +4998,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026711711}
   m_CullTransparentMesh: 0
+--- !u!114 &1026711716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026711711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f10cc86d5d46248b6b02fb3447e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderSpeed: 2
 --- !u!1001 &1028026175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5224,6 +5238,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6752834850076947618, guid: cdbc81e37675ac248a7fc6b4b2451b97,
+        type: 3}
+      propertyPath: powerConsumption
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6752834850576148356, guid: cdbc81e37675ac248a7fc6b4b2451b97,
         type: 3}
       propertyPath: m_Name
@@ -5289,6 +5308,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1795235145}
+    - target: {fileID: 6752834850576148362, guid: cdbc81e37675ac248a7fc6b4b2451b97,
+        type: 3}
+      propertyPath: loopTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752834851045666862, guid: cdbc81e37675ac248a7fc6b4b2451b97,
+        type: 3}
+      propertyPath: powerConsumption
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdbc81e37675ac248a7fc6b4b2451b97, type: 3}
 --- !u!1 &1107890960
@@ -11124,6 +11153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarController: {fileID: 1662855258}
+  powerBarController: {fileID: 1026711711}
 --- !u!114 &1938328384
 MonoBehaviour:
   m_ObjectHideFlags: 0

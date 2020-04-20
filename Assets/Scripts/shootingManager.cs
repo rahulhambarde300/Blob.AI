@@ -14,10 +14,13 @@ public class shootingManager : MonoBehaviour
 
     public float accuracy;
     public float damage;
+    float power;
+    public float powerConsumption;
     // Start is called before the first frame update
     void Start()
     {
         spawnPosition = transform.Find("SpawnPosition");
+        power = GetComponentInParent<BlobController>().currentPower;
     }
 
     // Update is called once per frame
@@ -41,10 +44,10 @@ public class shootingManager : MonoBehaviour
         transform.rotation = rotation;
         //...instantiating the rocket
        
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") )
         {
 
-            if(Time.time >= shotTime)
+            if(Time.time >= shotTime && power >= powerConsumption)
             {
                 transform.Find("SpawnPosition/muzzle flash").gameObject.SetActive(true);
                 Vector3 acc = new Vector3(0, 0, Random.Range(-accuracy, accuracy));
@@ -54,10 +57,9 @@ public class shootingManager : MonoBehaviour
                 bulletInstance.GetComponent<BulletMovement>().damage = damage;
                 //GetComponent<Animator>().enabled = true;
                 Destroy(bulletInstance.gameObject, 4f);
-            }
-            
-            
 
+                GetComponentInParent<BlobController>().powerLoss(powerConsumption);
+            }
             
 
         }

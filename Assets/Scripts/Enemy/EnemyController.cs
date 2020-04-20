@@ -63,8 +63,15 @@ public class EnemyController : MonoBehaviour
         {
             transform.GetComponent<Animator>().SetBool("shoot", false);
             //GetComponent<Animator>().enabled = false;
-            GetComponentInChildren<EnemyGunController>().enabled = false;
-            transform.Find("gun/SpawnPosition/muzzle flash").gameObject.SetActive(false);
+            try
+            {
+                GetComponentInChildren<EnemyGunController>().enabled = false;
+                transform.Find("gun/SpawnPosition/muzzle flash").gameObject.SetActive(false);
+            }catch(Exception e)
+            {
+
+            }
+            
         }
 
 
