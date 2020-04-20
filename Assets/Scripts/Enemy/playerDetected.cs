@@ -23,7 +23,7 @@ public class playerDetected : MonoBehaviour
         {
             //Player Detected
             transform.root.GetComponent<EnemyController>().playerDetected = true;
-            Debug.Log("Hello doctor");
+           // Debug.Log("Hello doctor");
 
         }
     }
@@ -34,7 +34,7 @@ public class playerDetected : MonoBehaviour
         {
             //Player Detected
             transform.root.GetComponent<EnemyController>().playerDetected = false;
-            Debug.Log("Bye doctor");
+            //Debug.Log("Bye doctor");
 
         }
     }

@@ -101,11 +101,21 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(8f * facingDirection, rb.velocity.y);
             transform.GetComponent<Animator>().SetBool("run", true);
+            Parallax []p = FindObjectsOfType<Parallax>();
+            foreach(Parallax px in p)
+            {
+                px.moveBackground(facingDirection);
+            }
         }
         else
         {
             rb.velocity = new Vector2(speed * facingDirection, rb.velocity.y);
             transform.GetComponent<Animator>().SetBool("run", true);
+            Parallax[] p = FindObjectsOfType<Parallax>();
+            foreach (Parallax px in p)
+            {
+                px.moveBackground(facingDirection);
+            }
         }
         
 
