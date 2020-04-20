@@ -8,6 +8,12 @@ public class shootingManager : MonoBehaviour
     public Rigidbody2D bullet;
     bool revert = false;
     Transform spawnPosition;
+    public float timeBetweenShot;
+    public float shotTime;
+    public float bulletSpeed;
+
+    public float accuracy;
+    public float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +23,7 @@ public class shootingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //GetComponent<Animator>().enabled = false;
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float angle = Mathf.Atan2(direction.y,direction.x) * Mathf.Rad2Deg;
 
@@ -35,10 +41,22 @@ public class shootingManager : MonoBehaviour
         transform.rotation = rotation;
         //...instantiating the rocket
        
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButton("Fire1"))
         {
-            Rigidbody2D bulletInstance = Instantiate(bullet, spawnPosition.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody2D;
-            bulletInstance.velocity = new Vector2(direction.x * 10f, direction.y * 10f);
+
+            if(Time.time >= shotTime)
+            {
+                Vector3 acc = new Vector3(0, 0, Random.Range(-accuracy, accuracy));
+                Rigidbody2D bulletInstance = Instantiate(bullet, spawnPosition.position, spawnPosition.rotation * Quaternion.Euler(acc)) as Rigidbody2D;
+                //bulletInstance.velocity = (new Vector2(direction.x, direction.y).normalized) *  new Vector2(bulletSpeed,bulletSpeed);
+                shotTime = Time.time + timeBetweenShot;
+                bulletInstance.GetComponent<BulletMovement>().damage = damage;
+                //GetComponent<Animator>().enabled = true;
+                Destroy(bulletInstance.gameObject, 4f);
+            }
+            
+
+            
 
         }
         

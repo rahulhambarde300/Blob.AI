@@ -29,7 +29,8 @@ public class BlobController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        facingDirection = player.GetComponent<PlayerController>().facingDirection;
+        if(player != null)
+            facingDirection = player.GetComponent<PlayerController>().facingDirection;
         
        
         if (Input.GetMouseButtonDown(1))
@@ -71,15 +72,17 @@ public class BlobController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 toTarget = (Vector2)player.position - (Vector2)transform.position - new Vector2(facingDirection*2,-4);
-        
-        if (follow)
+        if (player != null)
         {
-            transform.Translate(toTarget * speed * Time.deltaTime);
+            Vector2 toTarget = (Vector2)player.position - (Vector2)transform.position - new Vector2(facingDirection * 2, -4);
+            if (follow)
+            {
+                transform.Translate(toTarget * speed * Time.deltaTime);
+            }
+
         }
+
     }
-
-
 
 
     private void Wait()
