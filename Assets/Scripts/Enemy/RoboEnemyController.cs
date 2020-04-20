@@ -109,7 +109,7 @@ public class RoboEnemyController : MonoBehaviour
 
     void move()
     {
-        transform.position += -facingDirection * transform.right * 5f * Time.deltaTime;
+        transform.position +=   transform.right * 5f * Time.deltaTime;
         //transform.GetComponent<Animator>().SetBool("run", true);
     }
 

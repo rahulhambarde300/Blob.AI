@@ -46,7 +46,7 @@ public class shootingManager : MonoBehaviour
 
             if(Time.time >= shotTime)
             {
-                transform.Find("SpawnPosition/MuzzleFlashEffect").gameObject.SetActive(true);
+                transform.Find("SpawnPosition/muzzle flash").gameObject.SetActive(true);
                 Vector3 acc = new Vector3(0, 0, Random.Range(-accuracy, accuracy));
                 Rigidbody2D bulletInstance = Instantiate(bullet, spawnPosition.position, spawnPosition.rotation * Quaternion.Euler(acc)) as Rigidbody2D;
                 //bulletInstance.velocity = (new Vector2(direction.x, direction.y).normalized) *  new Vector2(bulletSpeed,bulletSpeed);
@@ -63,7 +63,7 @@ public class shootingManager : MonoBehaviour
         }
         else
         {
-            transform.Find("SpawnPosition/MuzzleFlashEffect").gameObject.SetActive(false);
+            transform.Find("SpawnPosition/muzzle flash").gameObject.SetActive(false);
         }
 
     }
