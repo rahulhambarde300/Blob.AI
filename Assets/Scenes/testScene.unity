@@ -3604,15 +3604,45 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 115
       objectReference: {fileID: 0}
+    - target: {fileID: 3429928883131667921, guid: 20c27797302fec84083786fa260f88cf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.13906288
+      objectReference: {fileID: 0}
+    - target: {fileID: 3429928883131667921, guid: 20c27797302fec84083786fa260f88cf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.343319
+      objectReference: {fileID: 0}
+    - target: {fileID: 3429928883131667921, guid: 20c27797302fec84083786fa260f88cf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3429928883131667921, guid: 20c27797302fec84083786fa260f88cf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7114313
+      objectReference: {fileID: 0}
+    - target: {fileID: 3429928883131667921, guid: 20c27797302fec84083786fa260f88cf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70275563
+      objectReference: {fileID: 0}
+    - target: {fileID: 3429928883131667921, guid: 20c27797302fec84083786fa260f88cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5047660219801813575, guid: 20c27797302fec84083786fa260f88cf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5
+      value: -2.66
       objectReference: {fileID: 0}
     - target: {fileID: 5047660219801813575, guid: 20c27797302fec84083786fa260f88cf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.55
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 5047660219801813575, guid: 20c27797302fec84083786fa260f88cf,
         type: 3}
@@ -3673,6 +3703,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 109
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083389504830674975, guid: 20c27797302fec84083786fa260f88cf,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083389504830674975, guid: 20c27797302fec84083786fa260f88cf,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7083389505151002959, guid: 20c27797302fec84083786fa260f88cf,
         type: 3}
