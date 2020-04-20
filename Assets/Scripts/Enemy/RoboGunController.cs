@@ -17,7 +17,11 @@ public class RoboGunController : MonoBehaviour
     void Start()
     {
         spawnPosition = transform.Find("SpawnPosition");
-        transform.localScale *= new Vector2(-1, 1);
+        if(transform.GetComponentInParent<RoboEnemyController>().facingDirection == -1)
+        {
+            transform.localScale *= new Vector2(-1, 1);
+        }
+        
     }
 
     // Update is called once per frame

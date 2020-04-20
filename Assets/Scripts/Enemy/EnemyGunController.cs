@@ -28,7 +28,16 @@ public class EnemyGunController : MonoBehaviour
             Vector2 direction = FindObjectOfType<PlayerController>().transform.Find("Centre").transform.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-
+            if (direction.x < 0 && !revert)
+            {
+                transform.localScale = transform.localScale * new Vector2(1, 1);
+                revert = true;
+            }
+            else if (direction.x > 0 && revert)
+            {
+                transform.localScale = transform.localScale * new Vector2(-1, 1);
+                revert = false;
+            }
 
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = rotation;
