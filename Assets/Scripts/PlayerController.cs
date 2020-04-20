@@ -125,6 +125,19 @@ public class PlayerController : MonoBehaviour
         //FindObjectOfType<GameController>().decreaseHealth(dmg);
     }
 
+    public void healthUp()
+    {
+        if(currentHealth <= 70)
+        {
+            currentHealth += 30;
+        }
+        else
+        {
+            currentHealth = 100;
+        }
+        //FindObjectOfType<GameController>().increaseHealth();
+    }
+
     private void Die()
     {
         //GetComponent<Animator>().SetBool("Dead", true);

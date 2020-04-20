@@ -16,6 +16,9 @@ public class BlobController : MonoBehaviour
     Vector2 pos;
     bool goTo;
     int index;
+    public int maxCount;
+    public float maxPower=100;
+    public float currentPower;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +26,9 @@ public class BlobController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         follow = true;
         index = 0;
-
+        maxCount = 3;
+        currentPower = maxPower;
+        StartCoroutine(powerGain());
     }
 
     // Update is called once per frame
@@ -67,7 +72,7 @@ public class BlobController : MonoBehaviour
             changeShape();
         }
 
-
+        
     }
 
     private void FixedUpdate()
@@ -98,11 +103,30 @@ public class BlobController : MonoBehaviour
         transform.GetChild(index).gameObject.SetActive(false);
         //Set current weapon as invisible
         index += 1;
-        index %= childCount-1;
+        index %= maxCount-1;
         //Set next weapon as visible
         transform.GetChild(index).gameObject.SetActive(true);
 
         
+    }
+
+    public void powerLoss(float loss)
+    {
+        currentPower -= loss;
+        FindObjectOfType<GameController>().decreasePower(loss);
+    }
+
+    IEnumerator powerGain()
+    {
+        while (true)
+        {
+            if(currentPower < maxPower)
+            {
+                currentPower += 2;
+                FindObjectOfType<GameController>().increasePower(2);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
     }
 
 

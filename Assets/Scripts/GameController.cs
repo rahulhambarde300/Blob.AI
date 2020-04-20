@@ -5,13 +5,16 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     private HealthBarController healthInstance;
+    private PowerBarController powerInstance;
     public GameObject healthBarController;
 
     private float health;
+    private float power;
     // Start is called before the first frame update
     void Start()
     {
         health = 100;
+        power = 100;
         //gameOver = false;
 
 
@@ -21,8 +24,13 @@ public class GameController : MonoBehaviour
         {
             //gameOverScript = gameControlObject.GetComponent<GameOverScript>();
             healthInstance = healthBarController.GetComponent<HealthBarController>();
+            powerInstance = healthBarController.GetComponent<PowerBarController>();
+            
             healthInstance.setMaxHealth(100.0f);
             healthInstance.setHealth(100.0f);
+
+            powerInstance.setMaxHealth(100.0f);
+            powerInstance.setHealth(100.0f);
         }
         if (gameControlObject == null)
             Debug.Log("Sorry ,Couldn't find object");
@@ -49,7 +57,7 @@ public class GameController : MonoBehaviour
     public void increaseHealth()
     {
         if (health <= 80)
-            health += 20;
+            health += 30;
         else
             health = 100;
         updateHealth(health);
@@ -57,6 +65,27 @@ public class GameController : MonoBehaviour
     void updateHealth(float health2)
     {
         healthInstance.setHealth(health2);
+    }
+
+    public void increasePower(float power2)
+    {
+        if (power <= 100 - power2)
+            power += power2;
+        else
+            power = power2;
+        updatePower(power);
+    }
+
+    public void decreasePower(float power2)
+    {
+        if (power > 0)
+            power -= power2;
+        updatePower(power);
+    }
+
+    void updatePower(float power)
+    {
+        healthInstance.setHealth(power);
     }
 
 }
