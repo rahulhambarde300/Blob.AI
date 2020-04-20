@@ -45,6 +45,13 @@ public class BulletMovement : MonoBehaviour
             transform.Find("BloodSprayEffect").transform.SetParent(null);
             Destroy(gameObject,0f);
         }
+        if(collision.gameObject.tag == "Robot")
+        {
+            collision.transform.GetComponent<EnemyController>().takeDamage(damage);
+            transform.Find("ElectricalSparksEffect").gameObject.SetActive(true);
+            transform.Find("ElectricalSparksEffect").transform.SetParent(null);
+            Destroy(gameObject, 0f);
+        }
         if(collision.gameObject.tag == "Ground")
         {
             //Activate the particles effect

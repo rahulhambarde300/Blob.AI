@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyGunController : MonoBehaviour
+public class RoboGunController : MonoBehaviour
 {
     public Rigidbody2D bullet;
     bool revert = false;
@@ -17,6 +17,7 @@ public class EnemyGunController : MonoBehaviour
     void Start()
     {
         spawnPosition = transform.Find("SpawnPosition");
+        transform.localScale *= new Vector2(-1, 1);
     }
 
     // Update is called once per frame
@@ -32,8 +33,8 @@ public class EnemyGunController : MonoBehaviour
 
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = rotation;
-        
-        
+
+
 
 
 
@@ -47,8 +48,8 @@ public class EnemyGunController : MonoBehaviour
                 //{
                 //    bulletInstance.transform.localScale = bulletInstance.transform.localScale * new Vector2(-1, 1);
                 //}
-  
-            //bulletInstance.velocity = (new Vector2(direction.x, direction.y).normalized) *  new Vector2(bulletSpeed,bulletSpeed);
+
+                //bulletInstance.velocity = (new Vector2(direction.x, direction.y).normalized) *  new Vector2(bulletSpeed,bulletSpeed);
                 shotTime = Time.time + timeBetweenShot;
                 bulletInstance.GetComponent<BulletMovement>().damage = damage;
                 //GetComponent<Animator>().enabled = true;
