@@ -139,5 +139,6 @@ public class PlayerController : MonoBehaviour
     {
         //GetComponent<Animator>().SetBool("Dead", true);
         Destroy(gameObject, 0.5f);
+        FindObjectOfType<Menu>().gameOver();
     }
 }
