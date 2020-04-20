@@ -36,15 +36,17 @@ public class EnemyController : MonoBehaviour
             Die();
         }
 
-        if (playerDetected && !isInFireRange)
+        if (playerDetected && !isInFireRange )
         {
             moveTowardsPlayer();
         }
         if (isInFireRange)
         {
-            //transform.GetComponent<Animator>().SetBool("run", false);
-            GetComponent<Animator>().enabled = false;
+            transform.GetComponent<Animator>().SetBool("shoot", true);
+            //GetComponent<Animator>().enabled = false;
             GetComponentInChildren<EnemyGunController>().enabled = true;
+
+
         }
 
     }
@@ -52,7 +54,7 @@ public class EnemyController : MonoBehaviour
 
     private void moveTowardsPlayer()
     {
-        Transform player = FindObjectOfType<PlayerController>().transform.Find("Centre").transform.transform;
+        Transform player = FindObjectOfType<PlayerController>().transform.Find("Centre").transform;
         if(transform.position.x > player.position.x)
         {
             facingDirection = -1;
@@ -60,30 +62,35 @@ public class EnemyController : MonoBehaviour
         else if(transform.position.x <= player.position.x)
         {
             facingDirection = 1;
-            Walk();
         }
-        Walk();
+        move();
     }
 
     void Walk()
     {
+        //transform.GetComponent<Animator>().enabled = true;
         //rb.MovePosition(transform.position + transform.right * 5*facingDirection * Time.fixedDeltaTime);
         if (!onGround)
         {
-            rb.velocity = new Vector2(3f * facingDirection, rb.velocity.y);
+            rb.velocity = new Vector2(20f * facingDirection, rb.velocity.y);
             transform.GetComponent<Animator>().SetBool("run", true);
         }
         else
         {
-            rb.velocity = new Vector2(5f * facingDirection, rb.velocity.y);
+            rb.velocity = new Vector2(5f * facingDirection, 0);
             transform.GetComponent<Animator>().SetBool("run", true);
+            
         }
 
 
     }
+    void move()
+    {
+        transform.position += facingDirection*transform.right * 5f * Time.deltaTime;
+    }
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distToGround - 3.3f, lm);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distToGround - 3.3f, lm); ;
         return hit.collider != null;
     }
 
@@ -95,7 +102,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        GetComponent<Animator>().SetBool("Dead", true);
+        GetComponent<Animator>().SetBool("die", true);
         Destroy(gameObject, 0.5f);
     }
 }
