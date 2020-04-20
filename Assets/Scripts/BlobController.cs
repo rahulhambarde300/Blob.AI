@@ -93,11 +93,12 @@ public class BlobController : MonoBehaviour
 
     public void changeShape()
     {
+        transform.Find("changeIt").GetComponent<ParticleSystem>().Play();
         int childCount = transform.childCount;
         transform.GetChild(index).gameObject.SetActive(false);
         //Set current weapon as invisible
         index += 1;
-        index %= childCount;
+        index %= childCount-1;
         //Set next weapon as visible
         transform.GetChild(index).gameObject.SetActive(true);
 
