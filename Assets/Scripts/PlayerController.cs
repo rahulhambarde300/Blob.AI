@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     public float MaxHealth = 100f;
     public float currentHealth;
+    private int jumpCount;
 
 
     // Start is called before the first frame update
@@ -37,6 +38,10 @@ public class PlayerController : MonoBehaviour
     {
         //transform.Find("BloodSprayEffect").gameObject.SetActive(false);
         onGround = IsGrounded();
+        if (onGround)
+        {
+            jumpCount = 1;
+        }
         if (Input.GetKey(KeyCode.D))
         {
             if (facingDirection != 1)
@@ -61,10 +66,21 @@ public class PlayerController : MonoBehaviour
         {
             transform.GetComponent<Animator>().SetBool("run", false);
         }
-        if (Input.GetKeyDown(KeyCode.W) && onGround)
+        if (Input.GetKeyDown(KeyCode.W) )
         {
+            if (onGround)
+            {
+                rb.velocity = force;
+                jumpCount -= 1;
+
+            }
+            else if(jumpCount > 0)
+            {
+                rb.velocity = force;
+                jumpCount -= 1;
+            }
             
-            rb.velocity = force;
+            
 
         }
         
@@ -83,12 +99,12 @@ public class PlayerController : MonoBehaviour
         //rb.MovePosition(transform.position + transform.right * 5*facingDirection * Time.fixedDeltaTime);
         if(!onGround)
         {
-            rb.velocity = new Vector2(3f * facingDirection, rb.velocity.y);
+            rb.velocity = new Vector2(4f * facingDirection, rb.velocity.y);
             transform.GetComponent<Animator>().SetBool("run", true);
         }
         else
         {
-            rb.velocity = new Vector2(5f * facingDirection, rb.velocity.y);
+            rb.velocity = new Vector2(speed * facingDirection, rb.velocity.y);
             transform.GetComponent<Animator>().SetBool("run", true);
         }
         
@@ -99,12 +115,14 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distToGround -3.3f,lm);
         return hit.collider != null;
+        
     }
 
     public void takeDamage(float dmg)
     {
         currentHealth -= dmg;
         //transform.Find("BloodSprayEffect").gameObject.SetActive(true);
+        FindObjectOfType<GameController>().decreaseHealth(dmg);
     }
 
     private void Die()
