@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(float dmg)
     {
         currentHealth -= dmg;
-        transform.Find("BloodSprayEffect").gameObject.SetActive(true);
+        //transform.Find("BloodSprayEffect").gameObject.SetActive(true);
     }
 
     private void Die()

@@ -35,21 +35,27 @@ public class BulletMovement : MonoBehaviour
         transform.position += transform.right * speed * Time.deltaTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Enemy")
         {
             //Enemy takes damage
+            transform.Find("BloodSprayEffect").gameObject.SetActive(true);
             collision.transform.GetComponent<EnemyController>().takeDamage(damage);
+            transform.Find("BloodSprayEffect").transform.SetParent(null);
             Destroy(gameObject,0f);
         }
         if(collision.gameObject.tag == "Ground")
         {
             //Activate the particles effect
+            transform.Find("ElectricalSparksEffect").gameObject.SetActive(true);
+            transform.Find("ElectricalSparksEffect").transform.SetParent(null);
             Destroy(gameObject, 0f);
         }
         if(collision.gameObject.tag == "Player")
         {
+            transform.Find("BloodSprayEffect").gameObject.SetActive(true);
+            transform.Find("BloodSprayEffect").transform.SetParent(null);
             collision.transform.GetComponent<PlayerController>().takeDamage(damage);
             Destroy(gameObject, 0f);
         }
