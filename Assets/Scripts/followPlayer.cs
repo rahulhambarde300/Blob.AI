@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class followPlayer : MonoBehaviour
 {
-    public Transform player;
-    // Start is called before the first frame update
+    public Transform target;
+
+    public float smoothSpeed = 0.125f;
+    public Vector3 offset;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
     void Start()
     {
         
@@ -14,15 +21,12 @@ public class followPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player != null)
+        if(target != null)
         {
-            Vector3 velocity = Vector3.zero;
-            Vector3 forward = player.transform.forward * 10.0f;
-            Vector3 needPos = player.transform.position - forward;
-            transform.position = Vector3.SmoothDamp(transform.position, needPos,
-                                                    ref velocity, 0.05f);
-            transform.LookAt(player.transform);
-            transform.rotation = player.transform.rotation;
+            Vector3 desiredPosition = target.position + offset;
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+            transform.position = smoothedPosition;
+            transform.position = new Vector3(transform.position.x, transform.position.y, -7.2f);
         }
         
     }

@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
         //rb.MovePosition(transform.position + transform.right * 5*facingDirection * Time.fixedDeltaTime);
         if(!onGround)
         {
-            rb.velocity = new Vector2(4f * facingDirection, rb.velocity.y);
+            rb.velocity = new Vector2(8f * facingDirection, rb.velocity.y);
             transform.GetComponent<Animator>().SetBool("run", true);
         }
         else
