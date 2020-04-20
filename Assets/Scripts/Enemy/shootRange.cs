@@ -16,11 +16,18 @@ public class shootRange : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.transform.tag == "Player")
         {
             transform.root.GetComponent<EnemyController>().isInFireRange = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            transform.root.GetComponent<EnemyController>().isInFireRange = false;
         }
     }
 }

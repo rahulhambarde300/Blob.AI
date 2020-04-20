@@ -29,19 +29,9 @@ public class EnemyGunController : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
 
-            if (direction.x < 0 && !revert)
-            {
-                transform.localScale = transform.localScale * new Vector2(1, -1);
-                revert = true;
-            }
-            else if (direction.x > 0 && revert)
-            {
-                transform.localScale = transform.localScale * new Vector2(1, -1);
-                revert = false;
-            }
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = rotation;
-        }
+        
         
 
 
@@ -49,10 +39,15 @@ public class EnemyGunController : MonoBehaviour
 
             if (Time.time >= shotTime)
             {
-                transform.Find("SpawnPosition/MuzzleFlashEffect").gameObject.SetActive(true);
+                transform.Find("SpawnPosition/muzzle flash").gameObject.SetActive(true);
                 Vector3 acc = new Vector3(0, 0, Random.Range(-accuracy, accuracy));
                 Rigidbody2D bulletInstance = Instantiate(bullet, spawnPosition.position, spawnPosition.rotation * Quaternion.Euler(acc)) as Rigidbody2D;
-                //bulletInstance.velocity = (new Vector2(direction.x, direction.y).normalized) *  new Vector2(bulletSpeed,bulletSpeed);
+                //if (GetComponentInParent<EnemyController>().facingDirection == -1)
+                //{
+                //    bulletInstance.transform.localScale = bulletInstance.transform.localScale * new Vector2(-1, 1);
+                //}
+  
+            //bulletInstance.velocity = (new Vector2(direction.x, direction.y).normalized) *  new Vector2(bulletSpeed,bulletSpeed);
                 shotTime = Time.time + timeBetweenShot;
                 bulletInstance.GetComponent<BulletMovement>().damage = damage;
                 //GetComponent<Animator>().enabled = true;
@@ -60,7 +55,7 @@ public class EnemyGunController : MonoBehaviour
             }
 
 
-
+        }
 
     }
 }

@@ -17,6 +17,9 @@ public class EnemyController : MonoBehaviour
 
     public bool playerDetected = false;
     public bool isInFireRange = false;
+
+    private Vector2 originalScale;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,15 @@ public class EnemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         distToGround = GetComponent<Collider2D>().bounds.extents.y;
         force = new Vector2(0, jumpForce);
+        if(transform.rotation.y == 0)
+        {
+            facingDirection = 1;
+        }
+        else
+        {
+            facingDirection = -1;
+        }
+        originalScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -38,6 +50,7 @@ public class EnemyController : MonoBehaviour
 
         if (playerDetected && !isInFireRange )
         {
+            
             moveTowardsPlayer();
         }
         if (isInFireRange)
@@ -45,25 +58,52 @@ public class EnemyController : MonoBehaviour
             transform.GetComponent<Animator>().SetBool("shoot", true);
             //GetComponent<Animator>().enabled = false;
             GetComponentInChildren<EnemyGunController>().enabled = true;
-
-
         }
+        else
+        {
+            transform.GetComponent<Animator>().SetBool("shoot", false);
+            //GetComponent<Animator>().enabled = false;
+            GetComponentInChildren<EnemyGunController>().enabled = false;
+            transform.Find("gun/SpawnPosition/muzzle flash").gameObject.SetActive(false);
+        }
+
+
+
+        if (facingDirection == -1)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+
+
+
 
     }
 
 
     private void moveTowardsPlayer()
     {
-        Transform player = FindObjectOfType<PlayerController>().transform.Find("Centre").transform;
-        if(transform.position.x > player.position.x)
+        try
         {
-            facingDirection = -1;
+            Transform player = FindObjectOfType<PlayerController>().transform.Find("Centre").transform;
+            if (transform.position.x > player.position.x)
+            {
+                facingDirection = -1;
+            }
+            else if (transform.position.x <= player.position.x)
+            {
+                facingDirection = 1;
+            }
+            move();
         }
-        else if(transform.position.x <= player.position.x)
+        catch (Exception e)
         {
-            facingDirection = 1;
+
         }
-        move();
+        
     }
 
     void Walk()
@@ -86,7 +126,8 @@ public class EnemyController : MonoBehaviour
     }
     void move()
     {
-        transform.position += facingDirection*transform.right * 5f * Time.deltaTime;
+        transform.position += -facingDirection*transform.right * 5f * Time.deltaTime;
+        transform.GetComponent<Animator>().SetBool("run", true);
     }
     bool IsGrounded()
     {

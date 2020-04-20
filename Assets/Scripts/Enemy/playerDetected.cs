@@ -17,13 +17,24 @@ public class playerDetected : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.transform.tag == "Player")
         {
             //Player Detected
             transform.root.GetComponent<EnemyController>().playerDetected = true;
             Debug.Log("Hello doctor");
+
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            //Player Detected
+            transform.root.GetComponent<EnemyController>().playerDetected = false;
+            Debug.Log("Bye doctor");
 
         }
     }
