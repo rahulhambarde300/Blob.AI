@@ -74,12 +74,26 @@ public class BlobController : MonoBehaviour
             changeShape();
         }
 
-        if(Time.time > shotTime)
+        if(true)
         {
-            powerGain();
-            shotTime = Time.time + loopTime;
+            currentPower += 0.3f;
         }
+        if (currentPower > maxPower)
+        {
+            currentPower = maxPower;
+        }
+        FindObjectOfType<PowerBarController>().setPower(currentPower);
+        if (currentPower < 0)
+        {
+            transform.Find("gun").gameObject.GetComponent<shootingManager>().enabled = false;
+            transform.Find("pistol").gameObject.GetComponent<shootingManager>().enabled = false;
 
+        }
+        else
+        {
+            transform.Find("gun").gameObject.GetComponent<shootingManager>().enabled = true;
+            transform.Find("pistol").gameObject.GetComponent<shootingManager>().enabled = true;
+        }
         
     }
 
@@ -111,7 +125,7 @@ public class BlobController : MonoBehaviour
         transform.GetChild(index).gameObject.SetActive(false);
         //Set current weapon as invisible
         index += 1;
-        index %= maxCount-1;
+        index %= childCount-1;
         //Set next weapon as visible
         transform.GetChild(index).gameObject.SetActive(true);
 

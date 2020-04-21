@@ -83,14 +83,17 @@ public class PlayerController : MonoBehaviour
             
 
         }
-        
+        if(currentHealth > MaxHealth)
+        {
+            currentHealth = MaxHealth;
+        }
 
         onGround = IsGrounded();
         if (currentHealth <= 0)
         {
             Die();
         }
-
+        FindObjectOfType<HealthBarController>().setHealth(currentHealth);
     }
 
 
